@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class NetworkDataSource {
+internal class NetworkDataSource: INetworkDataSource {
 
     private val service: SkyengService
 
@@ -28,7 +28,7 @@ class NetworkDataSource {
             }
     }
 
-    suspend fun searchWord(word: String) : List<WordSearchPojo>? {
+    override suspend fun searchWord(word: String) : List<WordSearchPojo>? {
         return service.searchWord(word)
     }
 

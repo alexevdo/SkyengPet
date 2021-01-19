@@ -1,10 +1,8 @@
 package com.sano.skyengpet.data.pojo
 
-import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
-data class MeaningPojo(
+internal data class MeaningPojo(
     @SerializedName("id") val id: Int? = null,
     @SerializedName("partOfSpeechCode") val partOfSpeechCode: String? = null,
     @SerializedName("translation") val translation: TranslationPojo? = null,
