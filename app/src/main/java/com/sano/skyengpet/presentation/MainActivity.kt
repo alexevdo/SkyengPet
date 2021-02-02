@@ -6,6 +6,12 @@ import android.widget.FrameLayout
 import androidx.fragment.app.commit
 import com.sano.skyengpet.R
 
+//TODO access qualificators
+//TODO DSL
+//TODO SOLID
+//TODO MVI
+//TODO ViewBinding/Synthetic
+//TODO Koin
 internal class MainActivity : AppCompatActivity() {
 
     private lateinit var container: FrameLayout;

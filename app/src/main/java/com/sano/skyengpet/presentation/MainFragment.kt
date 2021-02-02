@@ -2,15 +2,17 @@ package com.sano.skyengpet.presentation
 
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sano.skyengpet.R
-import com.sano.skyengpet.domain.MainInteractor
-import com.sano.skyengpet.domain.model.Translation
+import com.sano.skyengpet.presentation.state.MainViewScreenState
 import com.sano.skyengpet.presentation.viewmodel.MainIntent
 import com.sano.skyengpet.presentation.viewmodel.MainViewModel
 
@@ -41,31 +43,47 @@ internal class MainFragment : Fragment(R.layout.fragment_main) {
             viewModel.process(MainIntent.Translate(wordToTranslate.text.toString()))
         }
 
-        initializeObservers()
+        subscribeToStateChanges()
 
         Toast.makeText(context, "onViewCreated", Toast.LENGTH_LONG).show()
     }
 
-    private fun initializeObservers() {
-        viewModel.stateMessage.observe(viewLifecycleOwner) {
-            if(it.isProgressIndicator) {
-                progressBar.show()
-            } else {
-                progressBar.hide()
-            }
-
-            when(it.intentId) {
-                MainInteractor.searchWordIntentId -> {
-                    if(it.isFailed) {
-                        Toast.makeText(context, getString(R.string.smth_went_wrong_label), Toast.LENGTH_LONG).show()
-                    }
+    private fun subscribeToStateChanges() {
+        viewModel.subscribeToScreenStateChanges().observe(viewLifecycleOwner) { screenState ->
+            when (screenState) {
+                is MainViewScreenState.Translated -> {
+                    showProgress(progressIsVisible = false)
+                    translation.text = screenState.translation.word
+                    translatedWordsAdapter.setItems(screenState.translatedWords)
                 }
-            }
+                is MainViewScreenState.Loading -> {
+                    showProgress(progressIsVisible = true)
+                }
+                is MainViewScreenState.NotFound -> {
+                    showProgress(progressIsVisible = false)
+                    showErrorToast()
+                }
+                is MainViewScreenState.Error -> {
+                    showProgress(progressIsVisible = false)
+                    showErrorToast(screenState.error)
+                }
+            }.exhaustive
         }
+    }
 
-        viewModel.viewState.observe(viewLifecycleOwner) { viewState ->
-            translation.text = viewState.translation?.word
-            translatedWordsAdapter.setItems(viewState.translatedWords)
+    private fun showErrorToast(error: Throwable? = null) {
+        if(error == null || error is NoSuchElementException) {
+            Toast.makeText(context, getString(R.string.word_not_found), Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(context, getString(R.string.smth_went_wrong_label), Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun showProgress(progressIsVisible: Boolean) {
+        if (progressIsVisible) {
+            progressBar.show()
+        } else {
+            progressBar.hide()
         }
     }
 
@@ -75,9 +93,3 @@ internal class MainFragment : Fragment(R.layout.fragment_main) {
         fun newInstance() = MainFragment()
     }
 }
-
-internal data class MainViewState(
-    val searchWord: String? = null,
-    val translation: Translation? = null,
-    val translatedWords: List<String>? = null
-)

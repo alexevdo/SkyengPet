@@ -1,3 +1,7 @@
 package com.sano.skyengpet.domain.model
 
-data class Translation(val word: String?)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Translation(val word: String?): Parcelable

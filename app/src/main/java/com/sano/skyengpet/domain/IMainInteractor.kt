@@ -5,5 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface IMainInteractor {
 
-    fun searchWord(searchWord: String): Flow<StateMessage<Translation>>
+    suspend fun searchWord(searchWord: String): Translation?
+
 }

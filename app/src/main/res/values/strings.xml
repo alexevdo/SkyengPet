@@ -3,4 +3,5 @@
     <string name="word_to_translate">Word to translate</string>
     <string name="translate">Translate</string>
     <string name="smth_went_wrong_label">Something went wrong!</string>
+    <string name="word_not_found">Can\'t translate this word!</string>
 </resources>
