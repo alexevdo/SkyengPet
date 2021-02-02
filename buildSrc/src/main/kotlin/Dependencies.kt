@@ -24,6 +24,8 @@ object Versions {
     // OkHttp
     const val loggingInterceptor = "4.2.1"
 
+    // Koin
+    const val koin = "2.2.2"
 }
 
 object Design {
@@ -56,4 +58,10 @@ object Retrofit {
 
 object OkHttp {
     const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
+}
+
+object Koin {
+    const val anroidXSkope = "org.koin:koin-androidx-scope:${Versions.koin}"
+    const val anroidXViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    const val anroidXFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
 }

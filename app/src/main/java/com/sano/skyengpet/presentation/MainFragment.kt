@@ -6,23 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.sano.skyengpet.R
 import com.sano.skyengpet.databinding.FragmentMainBinding
 import com.sano.skyengpet.presentation.state.MainViewScreenState
 import com.sano.skyengpet.presentation.viewmodel.MainIntent
 import com.sano.skyengpet.presentation.viewmodel.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class MainFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModel()
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var translatedWordsAdapter: TranslatedWordsAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -64,10 +68,11 @@ internal class MainFragment : Fragment() {
     }
 
     private fun showErrorToast(error: Throwable? = null) {
-        if(error == null || error is NoSuchElementException) {
+        if (error == null || error is NoSuchElementException) {
             Toast.makeText(context, getString(R.string.word_not_found), Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(context, getString(R.string.smth_went_wrong_label), Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.smth_went_wrong_label), Toast.LENGTH_LONG)
+                .show()
         }
     }
 

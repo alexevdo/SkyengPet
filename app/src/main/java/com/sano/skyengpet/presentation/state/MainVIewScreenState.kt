@@ -8,12 +8,14 @@ sealed class MainViewScreenState : ScreenState {
     object Loading : MainViewScreenState()
 
     @Parcelize
-    data class Translated(val searchWord: String? = null,
-                          val translation: Translation,
-                          val translatedWords: List<String>? = null) : MainViewScreenState()
+    data class Translated(
+        val searchWord: String? = null,
+        val translation: Translation,
+        val translatedWords: List<String>? = null
+    ) : MainViewScreenState()
 
     @Parcelize
-    object NotFound: MainViewScreenState()
+    object NotFound : MainViewScreenState()
 
     @Parcelize
     data class Error(val error: Throwable) : MainViewScreenState()

@@ -1,25 +1,20 @@
 package com.sano.skyengpet.presentation.viewmodel
 
-import com.sano.skyengpet.data.DataDomainMapper
-import com.sano.skyengpet.data.NetworkDataSource
-import com.sano.skyengpet.data.SkyengRepository
-import com.sano.skyengpet.domain.IMainInteractor
 import com.sano.skyengpet.domain.MainInteractor
 import com.sano.skyengpet.presentation.state.MainViewScreenState
 import kotlinx.coroutines.*
 
-internal class MainViewModel : StateFullBaseViewModel<MainViewScreenState>() {
-
-    private val interactor: IMainInteractor = MainInteractor(SkyengRepository(NetworkDataSource(), DataDomainMapper()))
+internal class MainViewModel(private val interactor: MainInteractor) :
+    StateFullBaseViewModel<MainViewScreenState>() {
 
     private val translatedWords: MutableList<String> = mutableListOf()
 
     private val viewModelCoroutineScope = CoroutineScope(
-            Dispatchers.Main
-                    + SupervisorJob()
-                    + CoroutineExceptionHandler { _, throwable ->
-                changeState(MainViewScreenState.Error(throwable))
-            })
+        Dispatchers.Main
+                + SupervisorJob()
+                + CoroutineExceptionHandler { _, throwable ->
+            changeState(MainViewScreenState.Error(throwable))
+        })
 
     fun process(intent: MainIntent) {
         when (intent) {
@@ -32,7 +27,13 @@ internal class MainViewModel : StateFullBaseViewModel<MainViewScreenState>() {
                         changeState(MainViewScreenState.NotFound)
                     } else {
                         translatedWords += intent.searchWord
-                        changeState(MainViewScreenState.Translated(intent.searchWord, translation, translatedWords))
+                        changeState(
+                            MainViewScreenState.Translated(
+                                intent.searchWord,
+                                translation,
+                                translatedWords
+                            )
+                        )
                     }
                 }
             }
