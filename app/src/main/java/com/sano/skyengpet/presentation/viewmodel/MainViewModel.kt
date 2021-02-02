@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sano.skyengpet.data.DataDomainMapper
 import com.sano.skyengpet.data.NetworkDataSource
 import com.sano.skyengpet.data.SkyengRepository
+import com.sano.skyengpet.domain.IMainInteractor
 import com.sano.skyengpet.domain.MainInteractor
 import com.sano.skyengpet.domain.ViewStateMessage
 import com.sano.skyengpet.presentation.MainViewState
@@ -14,9 +16,9 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-class MainViewModel : ViewModel() {
+internal class MainViewModel : ViewModel() {
 
-    private val interactor = MainInteractor(SkyengRepository(NetworkDataSource()))
+    private val interactor: IMainInteractor = MainInteractor(SkyengRepository(NetworkDataSource(), DataDomainMapper()))
 
     private val mutableViewState: MutableLiveData<MainViewState> = MutableLiveData()
     val viewState = mutableViewState as LiveData<MainViewState>

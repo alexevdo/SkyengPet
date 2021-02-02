@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sano.skyengpet.R
 
-class TranslatedWordsAdapter: RecyclerView.Adapter<TranslatedWordsAdapter.ViewHolder>() {
+internal class TranslatedWordsAdapter: RecyclerView.Adapter<TranslatedWordsAdapter.ViewHolder>() {
 
     private val items: MutableList<String> = mutableListOf()
 

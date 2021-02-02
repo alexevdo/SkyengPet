@@ -14,7 +14,7 @@ import com.sano.skyengpet.domain.model.Translation
 import com.sano.skyengpet.presentation.viewmodel.MainIntent
 import com.sano.skyengpet.presentation.viewmodel.MainViewModel
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+internal class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModels()
     private lateinit var translateBtn: Button
@@ -76,7 +76,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 }
 
-data class MainViewState(
+internal data class MainViewState(
     val searchWord: String? = null,
     val translation: Translation? = null,
     val translatedWords: List<String>? = null

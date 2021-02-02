@@ -9,9 +9,9 @@ import com.sano.skyengpet.domain.StateMessage.Companion.success
 import com.sano.skyengpet.domain.model.Translation
 import kotlinx.coroutines.flow.flow
 
-class MainInteractor(private val skyengRepository: SkyengRepository) {
+class MainInteractor(private val skyengRepository: ISkyengRepository): IMainInteractor {
 
-    fun searchWord(searchWord: String) = flow<StateMessage<Translation>> {
+    override fun searchWord(searchWord: String) = flow<StateMessage<Translation>> {
         emit(searchWordIntentId.requestStart(Source.NETWORK))
         Log.d(MainInteractor.javaClass.simpleName, "Test")
         try {

@@ -6,7 +6,7 @@ import android.widget.FrameLayout
 import androidx.fragment.app.commit
 import com.sano.skyengpet.R
 
-class MainActivity : AppCompatActivity() {
+internal class MainActivity : AppCompatActivity() {
 
     private lateinit var container: FrameLayout;
 

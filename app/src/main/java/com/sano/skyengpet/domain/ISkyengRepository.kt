@@ -1,5 +1,8 @@
 package com.sano.skyengpet.domain
 
-class ISkyengRepository {
+import com.sano.skyengpet.domain.model.Translation
 
+interface ISkyengRepository {
+
+    suspend fun searchWord(word: String): Translation?
 }
