@@ -5,22 +5,14 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.fragment.app.commit
 import com.sano.skyengpet.R
+import com.sano.skyengpet.databinding.ActivityMainBinding
 
-//TODO access qualificators
-//TODO DSL
-//TODO SOLID
-//TODO MVI
-//TODO ViewBinding/Synthetic
 //TODO Koin
 internal class MainActivity : AppCompatActivity() {
 
-    private lateinit var container: FrameLayout;
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        container = findViewById(R.id.container)
+        setContentView(ActivityMainBinding.inflate(layoutInflater).root)
 
         supportFragmentManager.commit {
             add(R.id.container, MainFragment.newInstance(), MainFragment.TAG)

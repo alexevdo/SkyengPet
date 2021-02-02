@@ -1,51 +1,43 @@
 package com.sano.skyengpet.presentation
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.sano.skyengpet.R
+import com.sano.skyengpet.databinding.FragmentMainBinding
 import com.sano.skyengpet.presentation.state.MainViewScreenState
 import com.sano.skyengpet.presentation.viewmodel.MainIntent
 import com.sano.skyengpet.presentation.viewmodel.MainViewModel
 
-internal class MainFragment : Fragment(R.layout.fragment_main) {
+internal class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var translateBtn: Button
-    private lateinit var wordToTranslate: EditText
-    private lateinit var translation: TextView
-    private lateinit var translatedWordsRecyclerView: RecyclerView
-    private lateinit var progressBar: ContentLoadingProgressBar
+
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var translatedWordsAdapter: TranslatedWordsAdapter
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        translateBtn = view.findViewById(R.id.translate_btn)
-        wordToTranslate = view.findViewById(R.id.word_to_translate_et)
-        translation = view.findViewById(R.id.translation_tv)
-        translatedWordsRecyclerView = view.findViewById(R.id.translations_rv)
-        progressBar = view.findViewById(R.id.progress_bar)
-
         translatedWordsAdapter = TranslatedWordsAdapter()
-        translatedWordsRecyclerView.layoutManager = LinearLayoutManager(context)
-        translatedWordsRecyclerView.adapter = translatedWordsAdapter
+        binding.translationsRv.adapter = translatedWordsAdapter
 
-        translateBtn.setOnClickListener {
-            viewModel.process(MainIntent.Translate(wordToTranslate.text.toString()))
+        binding.translateBtn.setOnClickListener {
+            viewModel.process(MainIntent.Translate(binding.wordToTranslateEt.text.toString()))
         }
 
         subscribeToStateChanges()
-
-        Toast.makeText(context, "onViewCreated", Toast.LENGTH_LONG).show()
     }
 
     private fun subscribeToStateChanges() {
@@ -53,7 +45,7 @@ internal class MainFragment : Fragment(R.layout.fragment_main) {
             when (screenState) {
                 is MainViewScreenState.Translated -> {
                     showProgress(progressIsVisible = false)
-                    translation.text = screenState.translation.word
+                    binding.translationTv.text = screenState.translation.word
                     translatedWordsAdapter.setItems(screenState.translatedWords)
                 }
                 is MainViewScreenState.Loading -> {
@@ -81,10 +73,16 @@ internal class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun showProgress(progressIsVisible: Boolean) {
         if (progressIsVisible) {
-            progressBar.show()
+            binding.progressBar.show()
         } else {
-            progressBar.hide()
+            binding.progressBar.hide()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        _binding = null
     }
 
     companion object {
