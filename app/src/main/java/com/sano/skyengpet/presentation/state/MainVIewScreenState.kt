@@ -9,9 +9,9 @@ sealed class MainViewScreenState : ScreenState {
 
     @Parcelize
     data class Translated(
-        val searchWord: String? = null,
-        val translation: Translation,
-        val translatedWords: List<String>? = null
+            val searchWord: String? = null,
+            val translation: Translation,
+            val translatedWords: List<String>? = null
     ) : MainViewScreenState()
 
     @Parcelize

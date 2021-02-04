@@ -5,16 +5,16 @@ import com.sano.skyengpet.presentation.state.MainViewScreenState
 import kotlinx.coroutines.*
 
 internal class MainViewModel(private val interactor: MainInteractor) :
-    StateFullBaseViewModel<MainViewScreenState>() {
+        StateFullBaseViewModel<MainViewScreenState>() {
 
     private val translatedWords: MutableList<String> = mutableListOf()
 
     private val viewModelCoroutineScope = CoroutineScope(
-        Dispatchers.Main
-                + SupervisorJob()
-                + CoroutineExceptionHandler { _, throwable ->
-            changeState(MainViewScreenState.Error(throwable))
-        })
+            Dispatchers.Main
+                    + SupervisorJob()
+                    + CoroutineExceptionHandler { _, throwable ->
+                changeState(MainViewScreenState.Error(throwable))
+            })
 
     fun process(intent: MainIntent) {
         when (intent) {
@@ -28,11 +28,11 @@ internal class MainViewModel(private val interactor: MainInteractor) :
                     } else {
                         translatedWords += intent.searchWord
                         changeState(
-                            MainViewScreenState.Translated(
-                                intent.searchWord,
-                                translation,
-                                translatedWords
-                            )
+                                MainViewScreenState.Translated(
+                                        intent.searchWord,
+                                        translation,
+                                        translatedWords
+                                )
                         )
                     }
                 }

@@ -23,9 +23,9 @@ internal class MainFragment : Fragment() {
     private lateinit var translatedWordsAdapter: TranslatedWordsAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -72,7 +72,7 @@ internal class MainFragment : Fragment() {
             Toast.makeText(context, getString(R.string.word_not_found), Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(context, getString(R.string.smth_went_wrong_label), Toast.LENGTH_LONG)
-                .show()
+                    .show()
         }
     }
 

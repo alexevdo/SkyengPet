@@ -18,13 +18,13 @@ internal class NetworkDataSourceImpl : NetworkDataSource {
         val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
         Retrofit.Builder()
-            .baseUrl(BuildConfig.API_URL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .apply {
-                service = create(SkyengService::class.java)
-            }
+                .baseUrl(BuildConfig.API_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .apply {
+                    service = create(SkyengService::class.java)
+                }
     }
 
     override suspend fun searchWord(word: String): List<WordSearchPojo>? {

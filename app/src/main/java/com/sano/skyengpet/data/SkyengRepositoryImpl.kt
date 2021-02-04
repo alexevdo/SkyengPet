@@ -4,8 +4,8 @@ import com.sano.skyengpet.domain.SkyengRepository
 import com.sano.skyengpet.domain.model.Translation
 
 internal class SkyengRepositoryImpl(
-    private val networkDataSource: NetworkDataSource,
-    private val dataDomainMapper: DataDomainMapper
+        private val networkDataSource: NetworkDataSource,
+        private val dataDomainMapper: DataDomainMapper
 ) : SkyengRepository {
 
     override suspend fun searchWord(word: String): Translation? {

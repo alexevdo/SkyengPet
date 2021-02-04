@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sano.skyengpet.presentation.state.ScreenState
 
-abstract class StateFullBaseViewModel<T : ScreenState>(
-) : ViewModel() {
+abstract class StateFullBaseViewModel<T : ScreenState> : ViewModel() {
     private val _screenState: MutableLiveData<T> = MutableLiveData()
 
     protected fun changeState(newState: T) {
