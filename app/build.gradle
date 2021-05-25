@@ -66,4 +66,9 @@ dependencies {
     implementation Koin.anroidXSkope
     implementation Koin.anroidXFragment
     implementation Koin.anroidXViewModel
+
+    implementation NavigationComponent.navigationFragmentKtx
+    implementation NavigationComponent.navigationUiKtx
+
+    implementation ViewBinding.propertyDelegate
 }

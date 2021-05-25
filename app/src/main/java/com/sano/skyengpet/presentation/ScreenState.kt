@@ -1,4 +1,4 @@
-package com.sano.skyengpet.presentation.state
+package com.sano.skyengpet.presentation
 
 import android.os.Parcelable
 

@@ -25,13 +25,20 @@ object Versions {
     const val loggingInterceptor = "4.2.1"
 
     // Koin
-    const val koin = "2.2.2"
+    const val koin = "2.2.3"
+
+    // Navigation Component
+    const val navComponent = "2.3.5"
+
+    // ViewBinding
+    const val viewBindingPropertyDelegate = "1.4.6"
 }
 
 object Design {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val material = "com.google.android.material:material:${Versions.material}"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val constraintLayout =
+        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 }
 
 object Ktx {
@@ -42,7 +49,8 @@ object Ktx {
 }
 
 object Coroutines {
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinXCoroutinesAndroid}"
+    const val coroutines =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinXCoroutinesAndroid}"
 }
 
 object Testing {
@@ -57,11 +65,24 @@ object Retrofit {
 }
 
 object OkHttp {
-    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
+    const val loggingInterceptor =
+        "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
 }
 
 object Koin {
-    const val anroidXSkope = "org.koin:koin-androidx-scope:${Versions.koin}"
-    const val anroidXViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
-    const val anroidXFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
+    const val anroidXSkope = "io.insert-koin:koin-androidx-scope:${Versions.koin}"
+    const val anroidXViewModel = "io.insert-koin:koin-androidx-viewmodel:${Versions.koin}"
+    const val anroidXFragment = "io.insert-koin:koin-androidx-fragment:${Versions.koin}"
+}
+
+object NavigationComponent {
+    const val navigationFragmentKtx =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.navComponent}"
+    const val navigationUiKtx =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.navComponent}"
+}
+
+object ViewBinding {
+    const val propertyDelegate =
+        "com.github.kirich1409:viewbindingpropertydelegate:${Versions.viewBindingPropertyDelegate}"
 }

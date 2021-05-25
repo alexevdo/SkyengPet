@@ -1,6 +1,7 @@
-package com.sano.skyengpet.presentation.state
+package com.sano.skyengpet.presentation.main
 
 import com.sano.skyengpet.domain.model.Translation
+import com.sano.skyengpet.presentation.ScreenState
 import kotlinx.android.parcel.Parcelize
 
 sealed class MainViewScreenState : ScreenState {

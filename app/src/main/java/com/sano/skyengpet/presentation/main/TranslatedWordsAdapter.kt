@@ -1,4 +1,4 @@
-package com.sano.skyengpet.presentation
+package com.sano.skyengpet.presentation.main
 
 import android.view.LayoutInflater
 import android.view.View

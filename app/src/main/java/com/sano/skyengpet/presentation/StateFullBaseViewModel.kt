@@ -1,9 +1,8 @@
-package com.sano.skyengpet.presentation.viewmodel
+package com.sano.skyengpet.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sano.skyengpet.presentation.state.ScreenState
 
 abstract class StateFullBaseViewModel<T : ScreenState> : ViewModel() {
     private val _screenState: MutableLiveData<T> = MutableLiveData()

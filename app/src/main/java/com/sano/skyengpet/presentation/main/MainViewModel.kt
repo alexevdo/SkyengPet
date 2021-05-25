@@ -1,7 +1,7 @@
-package com.sano.skyengpet.presentation.viewmodel
+package com.sano.skyengpet.presentation.main
 
 import com.sano.skyengpet.domain.MainInteractor
-import com.sano.skyengpet.presentation.state.MainViewScreenState
+import com.sano.skyengpet.presentation.StateFullBaseViewModel
 import kotlinx.coroutines.*
 
 internal class MainViewModel(private val interactor: MainInteractor) :

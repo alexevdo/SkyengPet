@@ -1,35 +1,22 @@
-package com.sano.skyengpet.presentation
+package com.sano.skyengpet.presentation.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.sano.skyengpet.R
 import com.sano.skyengpet.databinding.FragmentMainBinding
-import com.sano.skyengpet.presentation.state.MainViewScreenState
-import com.sano.skyengpet.presentation.viewmodel.MainIntent
-import com.sano.skyengpet.presentation.viewmodel.MainViewModel
+import com.sano.skyengpet.presentation.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-internal class MainFragment : Fragment() {
+internal class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModel()
 
-    private var _binding: FragmentMainBinding? = null
-    private val binding get() = _binding!!
+    private val binding: FragmentMainBinding by viewBinding()
 
     private lateinit var translatedWordsAdapter: TranslatedWordsAdapter
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,17 +69,5 @@ internal class MainFragment : Fragment() {
         } else {
             binding.progressBar.hide()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        _binding = null
-    }
-
-    companion object {
-        const val TAG = "MainFragment"
-
-        fun newInstance() = MainFragment()
     }
 }

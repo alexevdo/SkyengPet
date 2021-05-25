@@ -6,7 +6,7 @@ import com.sano.skyengpet.data.service.SkyengService
 import com.sano.skyengpet.domain.MainInteractor
 import com.sano.skyengpet.domain.MainInteractorImpl
 import com.sano.skyengpet.domain.SkyengRepository
-import com.sano.skyengpet.presentation.viewmodel.MainViewModel
+import com.sano.skyengpet.presentation.main.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
