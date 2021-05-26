@@ -1,44 +1,36 @@
 package com.sano.skyengpet.presentation.main
 
 import com.sano.skyengpet.domain.MainInteractor
-import com.sano.skyengpet.presentation.StateFullBaseViewModel
-import kotlinx.coroutines.*
+import com.sano.skyengpet.presentation.BaseViewModel
+import kotlinx.coroutines.launch
 
 internal class MainViewModel(private val interactor: MainInteractor) :
-        StateFullBaseViewModel<MainViewScreenState>() {
+    BaseViewModel<MainViewScreenState>() {
+
+    override fun handleError(error: Throwable) = MainViewScreenState.Error(error)
 
     private val translatedWords: MutableList<String> = mutableListOf()
-
-    private val viewModelCoroutineScope = CoroutineScope(
-            Dispatchers.Main
-                    + SupervisorJob()
-                    + CoroutineExceptionHandler { _, throwable ->
-                changeState(MainViewScreenState.Error(throwable))
-            })
 
     fun process(intent: MainIntent) {
         when (intent) {
             is MainIntent.Translate -> {
                 changeState(MainViewScreenState.Loading)
-                viewModelCoroutineScope.launch {
-                    val translation = interactor.searchWord(intent.searchWord)
-
-                    if (translation == null) {
-                        changeState(MainViewScreenState.NotFound)
-                    } else {
-                        translatedWords += intent.searchWord
-                        changeState(
-                                MainViewScreenState.Translated(
-                                        intent.searchWord,
-                                        translation,
-                                        translatedWords
-                                )
-                        )
-                    }
+                coroutineScope.launch {
+                    changeState(translateWord(intent.searchWord))
                 }
             }
         }
     }
+
+    private suspend fun translateWord(searchWord: String): MainViewScreenState =
+        interactor.searchWord(searchWord)?.let { translation ->
+            translatedWords += searchWord
+            MainViewScreenState.Translated(
+                searchWord,
+                translation.translation,
+                translatedWords
+            )
+        } ?: MainViewScreenState.NotFound
 }
 
 sealed class MainIntent {

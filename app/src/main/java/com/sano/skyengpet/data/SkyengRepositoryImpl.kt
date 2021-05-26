@@ -8,9 +8,8 @@ internal class SkyengRepositoryImpl(
         private val dataDomainMapper: DataDomainMapper
 ) : SkyengRepository {
 
-    override suspend fun searchWord(word: String): Translation? {
-        return networkDataSource.searchWord(word)?.first()?.let {
+    override suspend fun searchWord(word: String): Translation? =
+        networkDataSource.searchWord(word)?.first()?.let {
             dataDomainMapper.wordSearchToTranslation(it)
         }
-    }
 }

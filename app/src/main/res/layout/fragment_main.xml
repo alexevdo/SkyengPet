@@ -5,16 +5,16 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/word_to_translate_et"
+        android:id="@+id/etWordToTranslate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/word_to_translate"
-        app:layout_constraintEnd_toStartOf="@id/translate_btn"
+        app:layout_constraintEnd_toStartOf="@id/btnTranslate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/translate_btn"
+        android:id="@+id/btnTranslate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/translate"
@@ -22,25 +22,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/translation_tv"
+        android:id="@+id/tvTranslation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/word_to_translate_et" />
+        app:layout_constraintTop_toBottomOf="@id/etWordToTranslate" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/translations_rv"
+        android:id="@+id/rvTranslations"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/translation_tv" />
+        app:layout_constraintTop_toBottomOf="@id/tvTranslation" />
 
     <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/pbProgress"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

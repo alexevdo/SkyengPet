@@ -2,16 +2,17 @@ package com.sano.skyengpet.presentation.main
 
 import com.sano.skyengpet.domain.model.Translation
 import com.sano.skyengpet.presentation.ScreenState
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 sealed class MainViewScreenState : ScreenState {
+
     @Parcelize
     object Loading : MainViewScreenState()
 
     @Parcelize
     data class Translated(
-            val searchWord: String? = null,
-            val translation: Translation,
+            val searchWord: String,
+            val translation: String,
             val translatedWords: List<String>? = null
     ) : MainViewScreenState()
 
@@ -20,5 +21,6 @@ sealed class MainViewScreenState : ScreenState {
 
     @Parcelize
     data class Error(val error: Throwable) : MainViewScreenState()
+
 }
 
